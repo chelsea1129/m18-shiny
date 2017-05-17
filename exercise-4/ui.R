@@ -1,6 +1,9 @@
 # ui.R
 library(shiny)
 library(plotly)
+# install.packages("ggplot2")
+library(ggplot2)
+
 shinyUI(navbarPage('Electoral College',
                    # Create a tab panel for your map
                    tabPanel('Map',
@@ -20,22 +23,27 @@ shinyUI(navbarPage('Electoral College',
                                 plotlyOutput('map')
                               )
                             )
-                   ) 
+                   ), 
                    
                    # Create a tabPanel to show your scatter plot
-                   
+                   tabPanel('Scatter Plot',
                             # Add a titlePanel to your tab
+                            titlePanel('Electoral College Votes'),
                    
                             
                             # Create a sidebar layout for this tab (page)
-                   
+                              sidebarLayout(
                               
                               # Create a sidebarPanel for your controls
-                   
+                                    sidebarPanel(
                                 
                                 # Make a textInput widget for searching for a state in your scatter plot
-                   
-                              
+                                      selectInput('scattervar', label = 'Variable to scatter plot', choices = list("Population" = 'population', "Electoral Votes" = 'votes'))
+                                    ),
                               # Create a main panel, in which you should display your plotly Scatter plot
-                              
+                              mainPanel(
+                                plotlyOutput('scatter plot')
+                              )
+                            )
+                   )
 ))
